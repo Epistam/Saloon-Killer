@@ -2,7 +2,7 @@
 
 # Blit aux changements de scène + limitation boucle 60fps ?
 
-# select mode
+# select mode + F1
 
 ##################
 # Initialisation #
@@ -33,7 +33,6 @@ while cont:
 
 	# Variables concernant les appuis clavier (définies réinitialisées ici)
 	enter = False # Touche entrée
-	space = False # Touche espace
 	backspace = False # Touche effacer
 	zone1 = False # Clic souris dans la zone 1
 	zone2 = False
@@ -48,10 +47,13 @@ while cont:
 			cont = False
 		elif event.key == pygame.K_RETURN :
 			enter = True
-		elif event.key == pygame.K_SPACE :
-			space = True
 		elif event.key == pygame.K_BACKSPACE :
 			backspace = True
+		elif event.key == pygame.K_SPACE : # Les scènes définies ici sont accessibles à tout moment dans le programme en dehors des intéractions
+			scene = "clue"		   # propres aux scènes
+		elif event.key == pygame.K_F1 :
+			scene = "commands"
+
 
 	# Gestion souris
 	# Bouton gauche / event.pos est un couple de coordonnées que l'on récupère en indexant event.pos comme une liste (0 = x, 1 = y)
@@ -99,8 +101,6 @@ while cont:
 			scene = "primeHunter"
 		if zone3 == True:
 			scene = "barman"
-		if space == True:
-			scene = "clue"
 
 	elif scene == "dancer": # Présentation
 		pic = pygame.image.load("img/dancer1.png")
