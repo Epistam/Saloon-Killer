@@ -30,6 +30,7 @@ while cont:
 	# Variables concernant les appuis clavier (définies réinitialisées ici)
 	enter = False # Touche entrée
 	space = False # Touche espace
+	backspace = False # Touche effacer
 	zone1 = False # Clic souris dans la zone 1
 	zone2 = False
 	zone3 = False
@@ -37,10 +38,15 @@ while cont:
 	# Récupération et traitement des événements clavier / souris
 	event = pygame.event.poll()
 	# Gestion clavier
-	if(event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): # On ne prend pas en compte pygame.EXIT car le programme est en plein écran)
-		cont = False
-	elif(event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
-		enter = True
+	# On ne prend pas en compte pygame.EXIT car le programme est en plein écran
+	if event.type == pygame.KEYDOWN :
+		if event.key == pygame.K_ESCAPE :
+			cont = False
+		elif event.key == pygame.K_RETURN :
+			enter = True
+		elif event.key == pygame.K_BACKSPACE :
+			backspace = True
+
 	# Gestion souris
 	# Bouton gauche / event.pos est un couple de coordonnées que l'on récupère en indexant event.pos comme une liste (0 = x, 1 = y)
 	# La résolution étant adaptative, les zones cliquables sont définies non pas pas des coordonnées mais par le rapport entre les coordonnées
@@ -75,32 +81,42 @@ while cont:
 		if enter == True:
 			scene = "menu"
 
-#	elif scene == "menu":
+	elif scene == "menu":
+		pic = pygame.image.load("img/menu.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
-#	elif scene == "barman":
-		# Boucle pour catch le esc retour au menu à tout moment
-#	elif scene == "dancer":
+		window.blit(pic, (0,0))
 
-#	elif scene == "primeHunter":
+		if zone1 == True:
+			scene = "dancer"
+		if zone2 == True:
+			scene = "primeHunter"
+		if zone3 == True:
+			scene = "barman"
+
+	elif scene == "dancer":
+
+	elif scene == "dancer2":
+
+	elif scene == "dancer3":
+
+	elif scene == "primeHunter":
+
+	elif scene == "primeHunter2":
+
+	elif scene == "primeHunter3":
+
+	elif scene == "barman":
+
+	elif scene == "barman2":
+
+	elif scene == "barman3":
 
 
+	# Rafraichissement de l'écran à chaque itération de la boucle
 	pygame.display.flip()
-	#Chargement et collage du personnage
-#
-#
-#Barman = pygame.image.load("BarmanT.png").convert_alpha()
-#fenetre.blit(Barman, (500,320))
 
-#texte = pygame.image.load("PBarman.png")
-
-#Rafraichissement de l'ecran
-pygame.display.flip()
-
-# game_over = False
-
-# while not game_over:
-# 	for event in pygame.event.get():
-# 		if event.type == pygame.QUIT:
-# 			game_over = True
+# Désactivation des modules Pygame
 pygame.quit()
+# Arrêt du programme
 quit()
