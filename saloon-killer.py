@@ -1,4 +1,4 @@
-# créer header + fade
+# créer header + fade + encadrement souris
 
 ##################
 # Initialisation #
@@ -7,8 +7,6 @@
 # Imports
 import os, sys
 import pygame
-import time #temp
-# from pygame.locals import *
 
 # Initialisation des modules Pygame (individuelle pour économiser les ressources système)
 pygame.display.init()
@@ -21,9 +19,6 @@ displayInfo = pygame.display.Info() # On récupère les informations sur le disp
 # Variables globales
 cont = True # Conditionne l'exécution du programme
 scene = "intro" # Indique la scène actuelle
-#############
-# Fonctions #
-#############
 
 ###################
 # Trame narrative #
@@ -32,13 +27,31 @@ scene = "intro" # Indique la scène actuelle
 # Boucle événementielle (on récupère les appuis sur les touches du clavier)
 while cont:
 
-	enter = False
-	# Récupération et traitement des touches appuyées
-	for event in pygame.event.get():
-		if(event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): # On ne prend pas en compte pygame.EXIT car le programme est en plein écran)
-			cont = False
-		elif(event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
-			enter = True
+	# Variables concernant les appuis clavier (définies réinitialisées ici)
+	enter = False # Touche entrée
+	space = False # Touche espace
+	zone1 = False # Clic souris dans la zone 1
+	zone2 = False
+	zone3 = False
+
+	# Récupération et traitement des événements clavier / souris
+	event = pygame.event.poll()
+	# Gestion clavier
+	if(event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): # On ne prend pas en compte pygame.EXIT car le programme est en plein écran)
+		cont = False
+	elif(event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
+		enter = True
+	# Gestion souris
+	# Bouton gauche / event.pos est un couple de coordonnées que l'on récupère en indexant event.pos comme une liste (0 = x, 1 = y)
+	# La résolution étant adaptative, les zones cliquables sont définies non pas pas des coordonnées mais par le rapport entre les coordonnées
+	# et la résolution totale de l'écran.
+	elif(event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):
+		if(event.pos[0]/displayInfo.current_w <= 0.25 and event.pos[1]/displayInfo.current_h <= 0.25):
+			zone1 = True
+		if(event.pos[0]/displayInfo.current_w <= 0.25 and event.pos[1]/displayInfo.current_h <= 0.25):
+			zone2 = True
+		if(event.pos[0]/displayInfo.current_w <= 0.25 and event.pos[1]/displayInfo.current_h <= 0.25):
+			zone3 = True
 
 	# On regarde quelle scène on doit jouer
 	if scene == "intro":
@@ -53,6 +66,7 @@ while cont:
 	elif scene == "commands":
 		pic = pygame.image.load("img/commands.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
 		window.blit(pic, (0,0)) 
 
 		if enter == True:
