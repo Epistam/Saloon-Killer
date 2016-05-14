@@ -130,50 +130,90 @@ while cont:
 
 		window.blit(pic, (0,0))
 
-		if enter == True:
-			scene = "menu"
-		elif backspace == True:
+		if enter == True or backspace == True:
 			scene = "menu"
 
 	elif scene == "primeHunter":
+		pic = pygame.image.load("img/prime1.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "primeHunter2"
+		elif backspace == True:
+			scene = "menu"
 
 	elif scene == "primeHunter2":
+		pic = pygame.image.load("img/prime2.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "primeHunter3"
+		elif backspace == True:
+			scene = "menu"
 
 	elif scene == "primeHunter3":
+		pic = pygame.image.load("img/prime3.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True or backspace == True:
+			scene = "menu"
 
 	elif scene == "barman":
+		pic = pygame.image.load("img/barman1.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "barman2"
+		elif backspace == True:
+			scene = "menu"
 
 	elif scene == "barman2":
+		pic = pygame.image.load("img/barman2.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "barman3"
+		elif backspace == True:
+			scene = "menu"
 
 	elif scene == "barman3":
+		pic = pygame.image.load("img/barman3.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True or backspace == True:
+			scene = "menu"
 
 	elif scene == "clue":
+		pic = pygame.image.load("img/clue1.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "clue2"
+		elif backspace == True:
+			scene = "menu"
 
 	elif scene == "clue2":
+		pic = pygame.image.load("img/clue2.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
+
+		if enter == True or backspace == True:
+			scene = "menu"
 
 	# Rafraichissement de l'écran à chaque itération de la boucle
 	pygame.display.flip()
