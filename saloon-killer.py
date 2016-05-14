@@ -46,12 +46,15 @@ while cont:
 	# La résolution étant adaptative, les zones cliquables sont définies non pas pas des coordonnées mais par le rapport entre les coordonnées
 	# et la résolution totale de l'écran.
 	elif(event.type == pygame.MOUSEBUTTONDOWN and event.button == 1):
-		if(event.pos[0]/displayInfo.current_w <= 0.25 and event.pos[1]/displayInfo.current_h <= 0.25):
-			zone1 = True
-		if(event.pos[0]/displayInfo.current_w <= 0.25 and event.pos[1]/displayInfo.current_h <= 0.25):
-			zone2 = True
-		if(event.pos[0]/displayInfo.current_w <= 0.25 and event.pos[1]/displayInfo.current_h <= 0.25):
-			zone3 = True
+		if(event.pos[0]/displayInfo.current_w <= 0.3 and event.pos[1]/displayInfo.current_h <= 1):
+			if(event.pos[0]/displayInfo.current_w >= 0 and event.pos[1]/displayInfo.current_h >= 0.2624):
+				zone1 = True
+		if(event.pos[0]/displayInfo.current_w <= 0.68 and event.pos[1]/displayInfo.current_h <= 1):
+			if(event.pos[0]/displayInfo.current_w >= 0.301 and event.pos[1]/displayInfo.current_h >= 0.4498):
+				zone2 = True
+		if(event.pos[0]/displayInfo.current_w <= 1 and event.pos[1]/displayInfo.current_h <= 1):
+			if(event.pos[0]/displayInfo.current_w >= 0.681 and event.pos[1]/displayInfo.current_h >= 0.3748):
+				zone3 = True
 
 	# On regarde quelle scène on doit jouer
 	if scene == "intro":
