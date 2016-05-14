@@ -1,5 +1,9 @@
 # créer header + fade + encadrement souris
 
+# Blit aux changements de scène + limitation boucle 60fps ?
+
+# select mode
+
 ##################
 # Initialisation #
 ##################
@@ -44,6 +48,8 @@ while cont:
 			cont = False
 		elif event.key == pygame.K_RETURN :
 			enter = True
+		elif event.key == pygame.K_SPACE :
+			space = True
 		elif event.key == pygame.K_BACKSPACE :
 			backspace = True
 
@@ -93,25 +99,81 @@ while cont:
 			scene = "primeHunter"
 		if zone3 == True:
 			scene = "barman"
+		if space == True:
+			scene = "clue"
 
-	elif scene == "dancer":
+	elif scene == "dancer": # Présentation
+		pic = pygame.image.load("img/dancer1.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
-	elif scene == "dancer2":
+		window.blit(pic, (0,0))
 
-	elif scene == "dancer3":
+		if enter == True:
+			scene = "dancer2"
+		elif backspace == True:
+			scene = "menu"
+
+	elif scene == "dancer2": # Interrogation
+		pic = pygame.image.load("img/dancer2.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "dancer3"
+		elif backspace == True:
+			scene = "menu"
+
+	elif scene == "dancer3": # Accusation
+		pic = pygame.image.load("img/dancer3.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
+
+		if enter == True:
+			scene = "menu"
+		elif backspace == True:
+			scene = "menu"
 
 	elif scene == "primeHunter":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
 
 	elif scene == "primeHunter2":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
 
 	elif scene == "primeHunter3":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
 
 	elif scene == "barman":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
 
 	elif scene == "barman2":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
 
 	elif scene == "barman3":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
+		window.blit(pic, (0,0))
+
+	elif scene == "clue":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
+
+	elif scene == "clue2":
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
 
 	# Rafraichissement de l'écran à chaque itération de la boucle
 	pygame.display.flip()
