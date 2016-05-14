@@ -1,8 +1,7 @@
 # créer header + fade + encadrement souris
 
-# Blit aux changements de scène + limitation boucle 60fps ?
+# Blit aux changements de scène + limitation boucle 60fps -> scène exécutée à chaque boucle
 
-# select mode + F1
 
 ##################
 # Initialisation #
@@ -23,6 +22,8 @@ displayInfo = pygame.display.Info() # On récupère les informations sur le disp
 # Variables globales
 cont = True # Conditionne l'exécution du programme
 scene = "intro" # Indique la scène actuelle
+music = False
+musicState = False
 
 ###################
 # Trame narrative #
@@ -30,6 +31,11 @@ scene = "intro" # Indique la scène actuelle
 
 # Boucle événementielle (on récupère les appuis sur les touches du clavier)
 while cont:
+
+	if music = True and musicState = False : # On ne lance la musique qu'une seule fois
+		# Sweet Home Alabama - Lynyrd Skynyrd
+		pygame.mixer.music.load("mus/sha.ogg")
+		pygame.mixer.music.play() 
 
 	# Variables concernant les appuis clavier (définies réinitialisées ici)
 	enter = False # Touche entrée
@@ -53,7 +59,8 @@ while cont:
 			scene = "clue"		   # propres aux scènes
 		elif event.key == pygame.K_F1 :
 			scene = "commands"
-
+		elif event.key == pygame.K_s :
+			scene = "menuSelect"
 
 	# Gestion souris
 	# Bouton gauche / event.pos est un couple de coordonnées que l'on récupère en indexant event.pos comme une liste (0 = x, 1 = y)
@@ -101,6 +108,19 @@ while cont:
 			scene = "primeHunter"
 		if zone3 == True:
 			scene = "barman"
+
+	elif scene == "menuSelect":
+		pic = pygame.image.load("img/menu.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
+
+		if zone1 == True:
+			scene = "victory"
+		if zone2 == True:
+			scene = "gameOver"
+		if zone3 == True:
+			scene = "gameOver"
 
 	elif scene == "dancer": # Présentation
 		pic = pygame.image.load("img/dancer1.png")
@@ -214,6 +234,29 @@ while cont:
 
 		if enter == True or backspace == True:
 			scene = "menu"
+
+
+	elif scene == "victory":
+		pic = pygame.image.load("img/victory.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
+
+		music = True
+
+		if enter == True :
+			cont = false
+
+	elif scene == "gameOver":
+		pic = pygame.image.load("img/gameOver.png")
+		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
+
+		window.blit(pic, (0,0))
+
+		if enter == True :
+			cont = false
+		if backspace == True :
+			scene == "menu"
 
 	# Rafraichissement de l'écran à chaque itération de la boucle
 	pygame.display.flip()
