@@ -1,8 +1,3 @@
-# créer header + fade + encadrement souris
-
-# Blit aux changements de scène + limitation boucle 60fps -> scène exécutée à chaque boucle
-
-
 ##################
 # Initialisation #
 ##################
@@ -38,7 +33,7 @@ while cont:
 		if music == "mus/TheEcstacyOfGold.ogg" :
 			# The Ecstacy of Gold - Enio Morricone
 			pygame.mixer.music.load(music)
-			pygame.mixer.music.play()
+			pygame.mixer.music.play(-1) # -1 => Répétition un nombre de fois illimité
 		elif music == "mus/SweetHomeAlabama.ogg" :
 			# Sweet Home Alabama - Lynyrd Skynyrd
 			pygame.mixer.music.load(music)
