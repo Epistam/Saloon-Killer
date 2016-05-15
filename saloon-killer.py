@@ -12,7 +12,8 @@ import os, sys
 import pygame
 
 # Initialisation des modules Pygame (individuelle pour économiser les ressources système)
-pygame.display.init()
+pygame.display.init() # Gestion de l'affichage
+pygame.mixer.init() # Gestion du son
 
 # Création de la fenêtre (pas de résolution spécifiée, le jeu s'adapte à tous les écrans et en tire la résolution maximale)
 window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
@@ -22,8 +23,8 @@ displayInfo = pygame.display.Info() # On récupère les informations sur le disp
 # Variables globales
 cont = True # Conditionne l'exécution du programme
 scene = "intro" # Indique la scène actuelle
-music = False
-musicState = False
+music = "mus/TheEcstacyOfGold.ogg" # Musique ambiante (The Ecstacy of Gold - Enio Morricone)
+editMusic = True # On veut lancer la musique on démarrage de la boucle
 
 ###################
 # Trame narrative #
@@ -32,10 +33,17 @@ musicState = False
 # Boucle événementielle (on récupère les appuis sur les touches du clavier)
 while cont:
 
-	if music = True and musicState = False : # On ne lance la musique qu'une seule fois
-		# Sweet Home Alabama - Lynyrd Skynyrd
-		pygame.mixer.music.load("mus/sha.ogg")
-		pygame.mixer.music.play() 
+	if editMusic == True : # On change de musique
+		if music == "mus/TheEcstacyOfGold.ogg" :
+			# The Ecstacy of Gold - Enio Morricone
+			pygame.mixer.music.load(music)
+			pygame.mixer.music.play()
+		elif music == "mus/SweetHomeAlabama.ogg" :
+			# Sweet Home Alabama - Lynyrd Skynyrd
+			pygame.mixer.music.load(music)
+			pygame.mixer.music.play()
+		editMusic = False
+
 
 	# Variables concernant les appuis clavier (définies réinitialisées ici)
 	enter = False # Touche entrée
@@ -60,7 +68,10 @@ while cont:
 		elif event.key == pygame.K_F1 :
 			scene = "commands"
 		elif event.key == pygame.K_s :
-			scene = "menuSelect"
+			if scene == "menuSelect" :
+				scene = "menu"
+			else:
+				scene = "menuSelect"
 
 	# Gestion souris
 	# Bouton gauche / event.pos est un couple de coordonnées que l'on récupère en indexant event.pos comme une liste (0 = x, 1 = y)
@@ -110,7 +121,7 @@ while cont:
 			scene = "barman"
 
 	elif scene == "menuSelect":
-		pic = pygame.image.load("img/menu.png")
+		pic = pygame.image.load("img/menuSelect.png")
 		pic = pygame.transform.scale(pic, (displayInfo.current_w, displayInfo.current_h))
 
 		window.blit(pic, (0,0))
@@ -121,6 +132,8 @@ while cont:
 			scene = "gameOver"
 		if zone3 == True:
 			scene = "gameOver"
+		if backspace == True:
+			scene = "menu"
 
 	elif scene == "dancer": # Présentation
 		pic = pygame.image.load("img/dancer1.png")
@@ -242,10 +255,11 @@ while cont:
 
 		window.blit(pic, (0,0))
 
-		music = True
+		editMusic = True
+		music = "mus/SweetHomeAlabama.ogg"
 
 		if enter == True :
-			cont = false
+			cont = False
 
 	elif scene == "gameOver":
 		pic = pygame.image.load("img/gameOver.png")
@@ -256,7 +270,7 @@ while cont:
 		if enter == True :
 			cont = false
 		if backspace == True :
-			scene == "menu"
+			scene = "menu"
 
 	# Rafraichissement de l'écran à chaque itération de la boucle
 	pygame.display.flip()
