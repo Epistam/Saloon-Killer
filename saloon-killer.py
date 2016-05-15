@@ -34,6 +34,7 @@ editMusic = True # On veut lancer la musique on démarrage de la boucle
 while cont:
 
 	if editMusic == True : # On change de musique
+		editMusic = False # On réinitialise la variable conditionnelle
 		if music == "mus/TheEcstacyOfGold.ogg" :
 			# The Ecstacy of Gold - Enio Morricone
 			pygame.mixer.music.load(music)
@@ -42,7 +43,6 @@ while cont:
 			# Sweet Home Alabama - Lynyrd Skynyrd
 			pygame.mixer.music.load(music)
 			pygame.mixer.music.play()
-		editMusic = False
 
 
 	# Variables concernant les appuis clavier (définies réinitialisées ici)
@@ -255,8 +255,10 @@ while cont:
 
 		window.blit(pic, (0,0))
 
-		editMusic = True
-		music = "mus/SweetHomeAlabama.ogg"
+		# On ne veut lancer la musique qu'une fois
+		if music != "mus/SweetHomeAlabama.ogg" :
+			editMusic = True
+			music = "mus/SweetHomeAlabama.ogg"
 
 		if enter == True :
 			cont = False
