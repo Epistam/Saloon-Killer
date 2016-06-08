@@ -265,7 +265,7 @@ while cont:
 		window.blit(pic, (0,0))
 
 		if enter == True :
-			cont = false
+			cont = False
 		if backspace == True :
 			scene = "menu"
 
